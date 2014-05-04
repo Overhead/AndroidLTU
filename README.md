@@ -2,7 +2,7 @@ AndroidLTU
 ==========
 
 Android course at LTU 2014
-
+How to write ReadMe: http://daringfireball.net/projects/markdown/syntax#precode
 
 In order to set up this Application and get it working, you would need a Google GCM server.
 
