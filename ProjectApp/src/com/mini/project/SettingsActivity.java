@@ -1,25 +1,23 @@
 package com.mini.project;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import db.DBHelper;
-import db.Settings;
-import db.SettingsContract.SettingsEntry;
+import classes.HelperMethods;
+import classes.ServerSettings;
 
 public class SettingsActivity extends Activity {
 
 	private EditText ipField, portField;
-	private DBHelper mDbHelper;
-	private HelperMethods helper = new HelperMethods();
-	private Settings settings;
-	
-	
+	private String SERVER_IP = "54.220.71.46";
+	private int SERVER_PORT = 9999;
+	private ServerSettings settings;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,7 +25,7 @@ public class SettingsActivity extends Activity {
 		InitializeViews();
 	}
 
-	
+
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.saveSettingsButton:
@@ -35,87 +33,42 @@ public class SettingsActivity extends Activity {
 			break;
 		}
 	}
-	
+
 	public void InitializeViews(){
 		ipField = (EditText)findViewById(R.id.SettingsIPET);
 		portField = (EditText)findViewById(R.id.SettingsPortET);
-		mDbHelper = new DBHelper(this);
+		settings = new HelperMethods(this).GetSettings();
 		
-		settings = helper.getSettings(this);
-		
-		if(settings != null) {
+		if(settings == null) {
+			ipField.setText(SERVER_IP);
+			portField.setText(Integer.toString(SERVER_PORT));
+		} else {
 			ipField.setText(settings.getIP());
-			portField.setText(settings.getPORT());
+			portField.setText(Integer.toString(settings.getPORT()));
 		}
-		else {
-			ipField.setText("127.0.0.1");
-			portField.setText("9999");
-		}
+		
 	} 
-	
+
 	public void saveSettings(){
+		try {
 		if(ipField.getText().toString().equals("") || portField.getText().toString().equals("")){
 			Toast.makeText(this, "IP and Port must be set", Toast.LENGTH_SHORT).show();
 		} else {
-			if(!updateSettings())
-				createSettings();
-			
+			final SharedPreferences prefs = new HelperMethods(this).getSharedPreferences();
+	        SharedPreferences.Editor editor = prefs.edit();
+	        editor.putString("IP", ipField.getText().toString());
+	        editor.putInt("PORT", Integer.parseInt(portField.getText().toString()));
+	        editor.commit();
 			Toast.makeText(getApplicationContext(), "Saved settings",
 					Toast.LENGTH_SHORT).show();
+			
+			Intent returnIntent = new Intent();
+			setResult(RESULT_OK,returnIntent);     
 			finish();
 		}
-	}
-	
-	public boolean createSettings(){
-		
-		// Gets the data repository in write mode
-		SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-		// Create a new map of values, where column names are the keys
-		ContentValues values = new ContentValues();
-		values.put(SettingsEntry.ID, "1");
-		values.put(SettingsEntry.IP_COLUMN, ipField.getText().toString());
-		values.put(SettingsEntry.PORT_COLUMN, portField.getText().toString());
-
-		// Insert the new row, returning the primary key value of the new row
-		long newRowId;
-		newRowId = db.insert(
-		         SettingsEntry.TABLE_NAME,
-		         null,
-		         values); 
-		
-		if(newRowId != -1) {
-			Log.i("Settings", "Updated settings, rowId: " + newRowId);
-			return true;
+		} catch(Exception ex) {
+			Toast.makeText(this, "Error on saving settings: " + ex.getMessage(), Toast.LENGTH_LONG).show();
 		}
-		else {
-			Log.i("Settings", "Could not update settings, rowId: " + newRowId);
-			return false;
-		}
-	}
-	
-	public boolean updateSettings(){
-		SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-		// New value for one column
-		ContentValues values = new ContentValues();
-		values.put(SettingsEntry.IP_COLUMN, ipField.getText().toString());
-		values.put(SettingsEntry.PORT_COLUMN, portField.getText().toString());
-
-		// Which row to update, based on the ID
-		String selection = SettingsEntry.ID + " LIKE ?";
-		String[] selectionArgs = { String.valueOf(1) };
-
-		int count = db.update(
-		    SettingsEntry.TABLE_NAME,
-		    values,
-		    selection,
-		    selectionArgs);
-		
-		if(count == 0)
-			return false;
-		else 
-			return true;
 	}
 	
 }

@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/mainTitleSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/AcceloerometerTitle"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/axisLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/mainTitleSender"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/XaxisTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="X: "
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/YaxisTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Y; "
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ZaxisTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Z: "
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+            
+        <ToggleButton
+            android:id="@+id/RecordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:onClick="onClick"
+            android:layout_below="@+id/axisLL"
+            android:background="@drawable/togglebuttons"
+            android:textOff="@string/StartMeasurement" 
+            android:textOn="@string/StopMeasurement" />
+        
+    <TextView 
+         android:id="@+id/LastMeasureTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="No recording"
+            android:layout_below="@+id/RecordButton"
+        />
+    
+</RelativeLayout>

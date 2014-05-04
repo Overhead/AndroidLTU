@@ -3,4 +3,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+                    
+    <TextView 
+        android:id="@+id/LastValueTV"
+        android:text="@string/LastValues"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    
+    <Button android:id="@+id/GetLatestMeasure"
+        android:text="@string/GetLatest"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/LastValueTV"
+        style="@style/CustomButton"
+        android:onClick="onClick" 
+        />
+    
+     <Button android:id="@+id/ShowAnimationButton"
+        android:text="@string/ShowRecording"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/GetLatestMeasure"
+        android:enabled="false"
+        style="@style/CustomButton"
+        android:onClick="onClick" 
+        />
+                
+    <TextView 
+        android:id="@+id/RegisteredView"
+        android:layout_marginTop="20dp"
+        android:text="@string/NotregisteredGCM"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/ShowAnimationButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    
+    <ToggleButton 
+        android:id="@+id/GcmRegisterButton"
+        android:layout_marginTop="5dp"
+        android:textOff="@string/GCMRegister"
+        android:textOn="@string/GCMUnRegister"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/RegisteredView"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/togglebuttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        />
+     
+    <TextView 
+        android:id="@+id/gcmView"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/GcmRegisterButton"
+        android:gravity="center_horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+
 </RelativeLayout>

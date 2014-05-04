@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Measurement Recorder</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="StartMeasurement">Record measurement</string>
+    <string name="StopMeasurement">Stop recording</string>
+    <string name="AcceloerometerTitle">Accelerometer</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Settings strings -->
+    <string name="ServerAddTitle">Server address</string>
+    <string name="IPHint">IP-address</string>
+    <string name="PortHint">Port</string>
+    <string name="Save">Save</string>
+    
+</resources>

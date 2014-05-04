@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ProjectApp</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Measurement Reciever</string>
     <string name="action_settings">Settings</string>
     <string name="chooseActivityTitle">Choose activity to start</string>
-    <string name="StartSender">Sender</string>
     <string name="StartReciever">Reciever</string>
-    <string name="title_activity_sender">SenderActivity</string>
-    <string name="title_activity_reciever">RecieverActivity</string>
-    <string name="StartAutoSend">Start autosend</string>
-    <string name="StopAutoSend">Stop autosend</string>
-    <string name="ManualSend">Send manually</string>
-    <string name="AcceloerometerTitle">Accelerometer</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="NotregisteredGCM">Not registered to GCM</string>
+    <string name="RegisteredGCM">Registered to GCM</string>
+    <string name="LastValues">Last Measure</string>
+    <string name="UpdatedLastValues">Updated!!! Last Measure</string>
 
     <!-- Settings strings -->
     <string name="ServerAddTitle">Server address</string>
     <string name="IPHint">IP-address</string>
     <string name="PortHint">Port</string>
     <string name="Save">Save</string>
-    
+
+    <!-- Button strings -->
+    <string name="title_activity_reciever">Measurement Reciever</string>
+    <string name="GCMRegister">Register to GCM</string>
+    <string name="GCMUnRegister">Unregister to GCM</string>
+    <string name="ShowRecording">Show latest measure</string>
+    <string name="GetLatest">Get last stored measure</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

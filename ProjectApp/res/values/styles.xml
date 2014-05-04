@@ -16,5 +16,24 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="CustomButton">
+	    <item name="android:layout_width">wrap_content</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textColor">#ffffff</item>
+	    <item name="android:gravity">center</item>
+	    <item name="android:layout_margin">10dp</item>
+	    <item name="android:shadowColor">#000000</item>
+	    <item name="android:shadowDx">1</item>
+	    <item name="android:shadowDy">1</item>
+	    <item name="android:shadowRadius">2</item>
+	    <item name="android:background">@drawable/yellow_button</item>
+	</style>
+    
+     <style name="CustomEditText">
+ 	    <item name="android:background">@drawable/edittext</item>
+ 	    <item name="android:paddingLeft">8dp</item>
+ 	    <item name="android:layout_height">wrap_content</item>
+ 	</style>
 
 </resources>

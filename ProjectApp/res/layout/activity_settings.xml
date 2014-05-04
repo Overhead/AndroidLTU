@@ -24,24 +24,22 @@
         <EditText
             android:id="@+id/SettingsIPET"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="0.7"
+            style="@style/CustomEditText"
             android:hint="@string/IPHint" />
 
         <EditText
             android:id="@+id/SettingsPortET"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="0.3"
+            style="@style/CustomEditText"
             android:hint="@string/PortHint"
             android:inputType="numberSigned" />
     </LinearLayout>
 
     <Button
         android:id="@+id/saveSettingsButton"
-        android:layout_width="wrap_content"
-    	android:layout_marginLeft="5dp"
-        android:layout_height="wrap_content"
+        style="@style/CustomButton"
         android:text="@string/Save"
         android:onClick="onClick"
         />
