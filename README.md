@@ -9,6 +9,11 @@ In order to set up this Application and get it working, you would need a Google 
 A guide on how to move forward on this can be found here.
 http://developer.android.com/google/gcm/gs.html
 
+####Important
+To make the application work you have to ensure that Google Play Services are downloaded and linked to the ProjectApp as a library. How to do this can be found [HERE](http://developer.android.com/google/play-services/setup.html).
+All that has to be done is downloading the Google Play Services, import it into your own project and add it as a Library in the ProjectApp. 
+
+######The Google Play Services project is found in: <p> ..\..\Android\sdk\extras\google\google_play_services\libproject </p>
 
 ###Variables that has to be set:
 Then when GCM is set up, you need to apply the Project_ID and Auth_Key variables in the different apps.
