@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+    tools:context=".URLConnectionActivity" >
+
+
+	<EditText
+		android:id="@+id/EditText01"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="7px" />
+	<Button
+		android:text="Do some SLOW work"
+		android:id="@+id/Button01"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="7px" />
+	
+	<Button
+		android:text="Do some SLOW work 2"
+		android:id="@+id/Button03"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="7px" />
+	<Button
+		android:text="Do some QUICK work"
+		android:id="@+id/Button02"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="7px" />
+	
+    
+    
+    
+    
+</LinearLayout>

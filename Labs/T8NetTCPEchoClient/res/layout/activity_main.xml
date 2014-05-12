@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"       android:layout_height="fill_parent"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"          android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="@string/hostname"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editText1"           android:layout_width="201dp"
+        android:layout_height="wrap_content"        
+        android:hint="@string/DefaultHost"       android:inputType="text" >
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"  android:layout_height="wrap_content"
+        android:text="@string/port"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+     <EditText
+         android:id="@+id/editText2"            android:layout_width="73dp"
+         android:layout_height="wrap_content"
+         android:hint="@string/DefaultPort"            android:inputType="text"
+         android:width="100dp" />
+
+     <Button
+         android:id="@+id/button1"
+         android:layout_width="wrap_content"    android:layout_height="wrap_content"
+         android:onClick="myEchoHandler"
+         android:text="@string/connectButton" />
+    
+     <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/input"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_height="wrap_content" />
+     
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="myEchoHandler"
+            android:text="@string/send" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quit" android:onClick="myEchoHandler"/>
+    </LinearLayout>
+ 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="100dp"
+        android:inputType="textMultiLine" />
+    
+</LinearLayout>
+    
