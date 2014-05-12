@@ -204,7 +204,7 @@ public class RecieverActivity extends Activity {
 
 				String time = lastJSON.getString("Time");
 				int duration = lastJSON.getInt("Duration");
-				int mean = lastJSON.getInt("Mean");
+				double mean = lastJSON.getDouble("Mean");
 				int id = lastJSON.getInt("MeasurementID");
 				lastValueTV.setText(getResources().getString(R.string.LastValues) + " \n ID: " + id
 						 + "\nMean: " + mean + "\nDuration: " + duration + "\nDate: " + time);
@@ -488,7 +488,7 @@ public class RecieverActivity extends Activity {
 	            @Override
 	            protected void onPostExecute(String msg) {
 	            	try {
-	            	lastValueTV.setText(getResources().getString(R.string.UpdatedLastValues) + "\n"+ json.getInt("MeasurementID"));
+	            	lastValueTV.setText(getResources().getString(R.string.UpdatedLastValues));
 	            	} catch(Exception ex){
 	            		lastValueTV.setText(ex.getMessage());
 	                	Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();

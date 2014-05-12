@@ -9,7 +9,7 @@
     <string name="NotregisteredGCM">Not registered to GCM</string>
     <string name="RegisteredGCM">Registered to GCM</string>
     <string name="LastValues">Last Measure</string>
-    <string name="UpdatedLastValues">Updated!!! Last Measure</string>
+    <string name="UpdatedLastValues">Updated! New measure available</string>
 
     <!-- Settings strings -->
     <string name="ServerAddTitle">Server address</string>

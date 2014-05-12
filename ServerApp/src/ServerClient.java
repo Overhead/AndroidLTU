@@ -339,7 +339,7 @@ public class ServerClient extends Thread
 			JSONObject dataValues = new JSONObject();
 			while (rs.next()) {
 				Date date = rs.getDate("RegDate");
-				int avg = rs.getInt("Avg");
+				float avg = rs.getFloat("Avg");
 				int duration = rs.getInt("Duration");
 				dataValues.put("Mean", avg);
 				dataValues.put("Duration", duration);
