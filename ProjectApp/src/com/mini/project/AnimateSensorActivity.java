@@ -74,13 +74,20 @@ public class AnimateSensorActivity extends Activity {
 		super.onResume();
 		animationThread.setRunning(true);
 	}
-
+	
 	@Override
 	protected void onPause() {
 		animationThread.setRunning(false);
 		super.onPause();
 	}
 
+	
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+		mHandler.removeCallbacks(recordAccData);
+	}
+	
 	private void startAnimation() {
 		animateView = (AnimationView) findViewById(R.id.animate_view);
 		animationThread = animateView.getThread();
@@ -142,6 +149,7 @@ public class AnimateSensorActivity extends Activity {
     					counter++;
     					Log.i(TAG, "x: " + x + " Y: " + y + " Counter: " + counter);
     					animationThread.setGravityXandY(x,y);
+    					animationThread.setTextXandY(x, y);
     		        	mHandler.postDelayed(recordAccData, 100);
     				//}
     			} else {

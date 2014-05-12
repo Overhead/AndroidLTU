@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.Display;
@@ -86,12 +87,14 @@ public class AnimationView extends SurfaceView implements
 		private Bitmap backdropImage;
 		private List<Ball> ballList;
 
+		private float xValue, yValue;
 		private float gravityX, gravityY;
 		private long previousTime, currentTime;
 		private int screenX, screenY;
 
 		/** Constants */
 		private final static int NUMBER_OF_BALLS = 3;
+		private final static int TEXT_SIZE = 50;
 
 		/** Public Constructor */
 		public AnimationThread(SurfaceHolder holder, Context context,
@@ -218,11 +221,22 @@ public class AnimationView extends SurfaceView implements
 					(screenX - backdropImage.getWidth()) / 2,
 					(screenY - backdropImage.getHeight()) / 2, null);
 
+			
+			drawText(canvas);
 			drawFallingObjects(canvas);
 
 			previousTime = currentTime;
 		}
 
+		
+		private void drawText(Canvas canvas){
+			Paint paint = new Paint();
+			paint.setColor(Color.YELLOW);
+			paint.setTextSize(TEXT_SIZE);
+			canvas.drawText("X: " + xValue, screenX / 3, screenY / 4, paint);
+			canvas.drawText("Y: " + yValue, screenX / 3, (screenY / 4) + TEXT_SIZE, paint);
+		}
+		
 		/**
 		 * Draws the balls on the canvas at their current location.
 		 * 
@@ -273,6 +287,11 @@ public class AnimationView extends SurfaceView implements
 		public void setGravityXandY(float gravityX, float gravityY) {
 			this.gravityX = gravityX;
 			this.gravityY = gravityY;
+		}
+		
+		public void setTextXandY(float X, float Y){
+			this.xValue = X;
+			this.yValue = Y;
 		}
 
 	}

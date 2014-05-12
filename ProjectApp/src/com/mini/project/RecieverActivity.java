@@ -93,8 +93,6 @@ public class RecieverActivity extends Activity {
 			setSettingsObject();
 			
 			context = getApplicationContext();
-			checkIntent();
-			getLastJSON();
 		} catch(Exception ex) {
 			Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
 		}
@@ -103,9 +101,13 @@ public class RecieverActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
         // Check device for Play Services APK.
-        checkPlayServices();
+        if(checkPlayServices())
+        	ShowAlreadyRegStatus();
+        
         checkIntent();
+		getLastJSON();
 	}
 	
 	@Override
@@ -147,11 +149,7 @@ public class RecieverActivity extends Activity {
 			            	regButton.setEnabled(false);
 			            	regButton.setVisibility(View.GONE);
 			            } else {
-			            	Toast.makeText(context, "App is already registered", Toast.LENGTH_SHORT).show();
-			            	regView.setText("Already Registered");
-			            	regButton.setEnabled(false);
-			            	regButton.setVisibility(View.GONE);
-			            	regView.setTextSize(20);
+			            	ShowAlreadyRegStatus();
 			            }
 			        } else { //IF playservice
 			            Log.i(TAG, "No valid Google Play Services APK found.");
@@ -193,7 +191,6 @@ public class RecieverActivity extends Activity {
 			MeasureID = Integer.parseInt(extras.getString("MeasurementID", "0"));
 			Log.i(TAG, "Got this ID: " + MeasureID);
 			if(MeasureID != 0) {
-				lastValueTV.setText(getResources().getString(R.string.UpdatedLastValues) + "\n" +  MeasureID);
 				GetLatestMeasurement();
 			}
 		}
@@ -243,6 +240,13 @@ public class RecieverActivity extends Activity {
         return true;
     }
 
+    private void ShowAlreadyRegStatus(){
+    	regView.setText("Registered for GCM notifications");
+    	regButton.setEnabled(false);
+    	regButton.setVisibility(View.GONE);
+    	regView.setTextSize(20);
+    }
+    
     /**
      * Stores the registration ID and the app versionCode in the application's
      * {@code SharedPreferences}.
@@ -441,39 +445,42 @@ public class RecieverActivity extends Activity {
 	                	
 	                	InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 	            		socket = new Socket(serverAddr, SERVERPORT);
-	            		Log.i(TAG, "Sending to " + serverAddr + ":"+SERVERPORT);
-	            		PrintWriter outToServer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 	            		
-	            		JSONObject data = new JSONObject();
-	        			JSONObject content = new JSONObject();
-	        			content.put("ID", MeasureID);
-	        			content.put("Action", "GETDATA");
-	        			content.put("Authorization",AUTH_KEY);
-	        			data.put("Message", content);
-	            		
-	            		outToServer.println(data);
-	            		
-	            		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	            		
-	            		serverResponse = null;
-	                    
-	                    while((serverResponse = inFromServer.readLine()) != null)
-	                    	finalResult += serverResponse + "\n";
-	                    
-	            		new HelperMethods(getApplicationContext()).writeToFile(new JSONObject(finalResult).toString(), "LastMeasure.txt");
-	                    
-	            	    json = new JSONObject(finalResult);
-	            	    jsonArr = json.getJSONArray("Values");
-	            		
-	                    inFromServer.close();
-	                    outToServer.close();
+	            		if(socket.isConnected()) {
+		            		Log.i(TAG, "Sending to " + serverAddr + ":"+SERVERPORT);
+		            		PrintWriter outToServer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
+		            		
+		            		JSONObject data = new JSONObject();
+		        			JSONObject content = new JSONObject();
+		        			content.put("ID", MeasureID);
+		        			content.put("Action", "GETDATA");
+		        			content.put("Authorization",AUTH_KEY);
+		        			data.put("Message", content);
+		            		
+		            		outToServer.println(data);
+		            		
+		            		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		            		
+		            		serverResponse = null;
+		                    
+		                    while((serverResponse = inFromServer.readLine()) != null)
+		                    	finalResult += serverResponse + "\n";
+		                    
+		            		new HelperMethods(getApplicationContext()).writeToFile(new JSONObject(finalResult).toString(), "LastMeasure.txt");
+		                    
+		            	    json = new JSONObject(finalResult);
+		            	    jsonArr = json.getJSONArray("Values");
+		            		
+		                    inFromServer.close();
+		                    outToServer.close();
+	            		} else {
+	            			regView.setText("Could not connect to server \n");
+	            		}
 	                    
 	                } catch (IOException ex) {
-	                	regView.setText(getResources().getString(R.string.NotregisteredGCM));
-	                	Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
+	                	regView.setText("Could not get data \n" + ex.getMessage());
 	                } catch (JSONException e) {
-	                	regView.setText(getResources().getString(R.string.NotregisteredGCM));
-	                	Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+	                	regView.setText("Could not get data \n" + e.getMessage());
 					}
 	                return null;
 	            }
@@ -481,7 +488,7 @@ public class RecieverActivity extends Activity {
 	            @Override
 	            protected void onPostExecute(String msg) {
 	            	try {
-	            	lastValueTV.setText(getResources().getString(R.string.LastValues) + "\n: "+ json.getInt("MeasurementID"));
+	            	lastValueTV.setText(getResources().getString(R.string.UpdatedLastValues) + "\n"+ json.getInt("MeasurementID"));
 	            	} catch(Exception ex){
 	            		lastValueTV.setText(ex.getMessage());
 	                	Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();

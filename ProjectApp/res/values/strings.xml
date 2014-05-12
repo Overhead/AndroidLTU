@@ -22,7 +22,7 @@
     <string name="GCMRegister">Register to GCM</string>
     <string name="GCMUnRegister">Unregister to GCM</string>
     <string name="ShowRecording">Show latest measure</string>
-    <string name="GetLatest">Get last stored measure</string>
+    <string name="GetLatest">Show last stored measure</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>
