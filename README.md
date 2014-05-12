@@ -5,6 +5,8 @@ Android course at LTU 2014
 
 How to write ReadMe: http://daringfireball.net/projects/markdown/syntax#precode
 
+Ball animation code is from [This Page](http://www.samuelfrank.me/animating-on-a-surfaceview-using-sensors/). Thanks for example.
+
 In order to set up this Application and get it working, you would need a Google GCM server.
 A guide on how to move forward on this can be found here.
 http://developer.android.com/google/gcm/gs.html
