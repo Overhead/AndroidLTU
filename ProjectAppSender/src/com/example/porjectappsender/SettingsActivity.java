@@ -13,8 +13,8 @@ import classes.ServerSettings;
 public class SettingsActivity extends Activity {
 
 	private EditText ipField, portField;
-	private String SERVER_IP = "";
-	private int SERVER_PORT = 0;
+	private String SERVER_IP = "0.0.0.0";
+	private int SERVER_PORT = 9999;
 	private ServerSettings settings;
 
 

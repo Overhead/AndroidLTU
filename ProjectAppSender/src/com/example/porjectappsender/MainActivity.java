@@ -168,35 +168,42 @@ public class MainActivity extends Activity implements SensorEventListener {
 						InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 						socket = new Socket(serverAddr, SERVER_PORT);
 						
-						PrintWriter outToServer = new PrintWriter(new BufferedWriter(
-								new OutputStreamWriter(socket.getOutputStream())), true);
-	
-						JSONObject data = new JSONObject();
-						JSONObject content = new JSONObject();
-						content.put("Values", recordedValues);
-						content.put("Duration", RercordDuration);
-						content.put("Action", "Record");
-						content.put("Authorization", AUTH_KEY);
-						data.put("Message", content);
-	
-						Log.i(TAG, "Data sent to server: " + data.toString());
+						if(socket.isConnected()) {
 						
-						outToServer.println(data);
-	
-						BufferedReader inFromServer = new BufferedReader(
-								new InputStreamReader(socket.getInputStream()));
-	
-						serverResponse = null;
-	
-						while ((serverResponse = inFromServer.readLine()) != null)
-							finalResult += serverResponse + "\n";
-	
-						inFromServer.close();
-						outToServer.close();
-						socket.close();
-						RercordDuration = 0;
-	
-						msg = finalResult;
+							PrintWriter outToServer = new PrintWriter(new BufferedWriter(
+									new OutputStreamWriter(socket.getOutputStream())), true);
+		
+							JSONObject data = new JSONObject();
+							JSONObject content = new JSONObject();
+							content.put("Values", recordedValues);
+							content.put("Duration", RercordDuration);
+							content.put("Action", "Record");
+							content.put("Authorization", AUTH_KEY);
+							data.put("Message", content);
+		
+							Log.i(TAG, "Data sent to server: " + data.toString());
+							
+							outToServer.println(data);
+		
+							BufferedReader inFromServer = new BufferedReader(
+									new InputStreamReader(socket.getInputStream()));
+		
+							serverResponse = null;
+		
+							while ((serverResponse = inFromServer.readLine()) != null)
+								finalResult += serverResponse + "\n";
+		
+							inFromServer.close();
+							outToServer.close();
+							socket.close();
+							RercordDuration = 0;
+		
+							msg = finalResult;
+						
+						} else {
+							RercordDuration = 0;
+							msg = "Could not connect to server";
+						}
 	
 					} catch (IOException | JSONException ex) {
 						msg = "Error :" + ex.getMessage();
