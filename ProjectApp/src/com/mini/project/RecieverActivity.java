@@ -103,7 +103,7 @@ public class RecieverActivity extends Activity {
 		super.onResume();
 		
         // Check device for Play Services APK.
-        if(checkPlayServices())
+        if(!getRegistrationId(this).isEmpty())
         	ShowAlreadyRegStatus();
         
         checkIntent();
